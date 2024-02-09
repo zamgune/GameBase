@@ -7,9 +7,31 @@ public interface IStatus<T> where T : struct
     public T Value { get; }
 }
 
-public readonly struct Health : IStatus<int>
+public interface IIntStatus
 {
     public int Value { get; }
+    public EStatusType StatusType { get; }
+}
+
+public enum EStatusOperator
+{
+    Plus,
+    Minus,
+    PlusPercent,
+    MinusPercent
+}
+
+public enum EStatusType
+{
+    Health,
+    CriticalChance,
+}
+
+public readonly struct Health : IIntStatus
+{
+    public int Value { get; }
+
+    public EStatusType StatusType => EStatusType.Health;
 
     public Health(in int value)
     {
@@ -273,9 +295,11 @@ public readonly struct MagicDefense : IStatus<int>
     }
 }
 
-public readonly struct CriticalChance : IStatus<int>
+public readonly struct CriticalChance : IIntStatus
 {
     public int Value { get; }
+
+    public EStatusType StatusType => EStatusType.CriticalChance;
 
     public CriticalChance(in int value)
     {
