@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace YongSDK
 {
-    public interface ICustomInitializer
+    public enum EClockType
     {
-        void PreEnable();
-        void PreDisable();
+        Global,
+        Alliance,
+        Enemy,
     }
-
 }
