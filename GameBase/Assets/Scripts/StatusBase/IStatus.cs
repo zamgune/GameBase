@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace YongSDK
-{
     public interface IStatus<T> where T : struct
     {
         public T Value { get; }
@@ -395,32 +393,26 @@ namespace YongSDK
         }
     }
 
-    public readonly struct SkillHaste : IStatus<int>
+public readonly struct SkillHaste : IStatus<int>
+{
+    public int Value { get; }
+
+    public SkillHaste(in int value)
     {
-        public int Value { get; }
-
-        public SkillHaste(in int value)
-        {
-            Value = value;
-        }
-
-        public SkillHaste Add(in SkillHaste attackSpeed)
-        {
-            return new SkillHaste(Value + attackSpeed.Value);
-        }
-
-        public SkillHaste Sub(in SkillHaste attackSpeed)
-        {
-            return new SkillHaste(Value - attackSpeed.Value);
-        }
-        public override string ToString()
-        {
-            return $"{Value}";
-        }
+        Value = value;
     }
 
+    public SkillHaste Add(in SkillHaste attackSpeed)
+    {
+        return new SkillHaste(Value + attackSpeed.Value);
+    }
 
-
-
-
+    public SkillHaste Sub(in SkillHaste attackSpeed)
+    {
+        return new SkillHaste(Value - attackSpeed.Value);
+    }
+    public override string ToString()
+    {
+        return $"{Value}";
+    }
 }
